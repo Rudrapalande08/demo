@@ -1087,7 +1087,7 @@ class FitnessApp {
       else if (type === 'keto') { carbsPct = 5; protPct = 25; fatPct = 70; }
       else if (type === 'vegan') { carbsPct = 55; protPct = 25; fatPct = 20; }
       
-      // Calculate grams: Carbs 4kcal/g, Protein 4kcal/g, Fat 9kcal/g
+      // Calculate total grams
       const cG = Math.round((kcal * (carbsPct / 100)) / 4);
       const pG = Math.round((kcal * (protPct / 100)) / 4);
       const fG = Math.round((kcal * (fatPct / 100)) / 9);
@@ -1099,38 +1099,51 @@ class FitnessApp {
       // Render Macro SVG concentrics
       Charts.renderMacroRings('plan-macro-svg-container', carbsPct, protPct, fatPct);
       
+      // Calculate per-meal macro estimations (assuming 4 meals: 25% each roughly, or specific splits)
+      const b_cG = Math.round(cG * 0.25), b_pG = Math.round(pG * 0.25), b_fG = Math.round(fG * 0.25);
+      const l_cG = Math.round(cG * 0.35), l_pG = Math.round(pG * 0.30), l_fG = Math.round(fG * 0.30);
+      const d_cG = Math.round(cG * 0.30), d_pG = Math.round(pG * 0.25), d_fG = Math.round(fG * 0.30);
+      const s_cG = Math.round(cG * 0.10), s_pG = Math.round(pG * 0.20), s_fG = Math.round(fG * 0.15);
+
+      const renderMeal = (time, name, color, desc, p, c, f) => `
+        <div class="p-3 bg-white/5 rounded-xl border border-white/5 relative overflow-hidden group hover:border-${color} hover:bg-[#0c0d12]/80 transition-all duration-300">
+          <div class="absolute right-0 top-0 h-full w-1 bg-${color} opacity-50 group-hover:opacity-100 transition-opacity"></div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="text-[9px] text-${color} font-bold font-mono uppercase tracking-wider">${name} &bull; <span class="text-gray-400">${time}</span></span>
+            <span class="text-[9px] font-mono text-gray-500 bg-black/40 px-2 py-0.5 rounded border border-white/5">P:${p}g C:${c}g F:${f}g</span>
+          </div>
+          <p class="text-xs text-white leading-relaxed">${desc}</p>
+        </div>
+      `;
+
       // Build Meals templates
       const dietBox = document.getElementById('plan-diet-content');
       let mealsHTML = '';
       
       if (type === 'keto') {
-        mealsHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-pink-400 font-bold font-mono uppercase">Breakfast</span><p class="text-xs text-white mt-1">3 Scrambled Eggs in butter + 1/2 Avocado + Smoked Salmon slices.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-pink-400 font-bold font-mono uppercase">Lunch</span><p class="text-xs text-white mt-1">Grilled Chicken Caesar Salad (no croutons) with extra olive oil dressing & cheese.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-pink-400 font-bold font-mono uppercase">Dinner</span><p class="text-xs text-white mt-1">Pan seared Ribeye Steak + Asparagus spears sautéed in garlic ghee.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-pink-400 font-bold font-mono uppercase">Snack</span><p class="text-xs text-white mt-1">Macadamia nuts (30g) or pork rinds.</p></div>
-        `;
+        mealsHTML = 
+          renderMeal('08:00 AM', 'Breakfast', 'pink-400', '3 Scrambled Eggs in butter + 1/2 Avocado + Smoked Salmon slices. Drink 500ml water.', b_pG, b_cG, b_fG) +
+          renderMeal('01:00 PM', 'Lunch', 'pink-400', 'Grilled Chicken Caesar Salad (no croutons) with extra olive oil dressing & cheese.', l_pG, l_cG, l_fG) +
+          renderMeal('04:30 PM', 'Snack', 'pink-400', 'Macadamia nuts (30g) or pork rinds + Keto Electrolyte drink.', s_pG, s_cG, s_fG) +
+          renderMeal('07:30 PM', 'Dinner', 'pink-400', 'Pan seared Ribeye Steak + Asparagus spears sautéed in garlic ghee.', d_pG, d_cG, d_fG);
       } else if (type === 'vegan') {
-        mealsHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-cyan-400 font-bold font-mono uppercase">Breakfast</span><p class="text-xs text-white mt-1">Organic Tofu Scramble with spinach, mushrooms & 2 slices of sprouted grain toast.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-cyan-400 font-bold font-mono uppercase">Lunch</span><p class="text-xs text-white mt-1">Quinoa Bowl loaded with black beans, roasted sweet potatoes, broccoli & tahini drizzle.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-cyan-400 font-bold font-mono uppercase">Dinner</span><p class="text-xs text-white mt-1">Lentil Dahl Curry with brown rice + steamed asparagus.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-cyan-400 font-bold font-mono uppercase">Snack</span><p class="text-xs text-white mt-1">Pea Protein Shake + banana blended with almond milk.</p></div>
-        `;
+        mealsHTML = 
+          renderMeal('07:30 AM', 'Breakfast', 'cyan-400', 'Organic Tofu Scramble with spinach, mushrooms & 2 slices of sprouted grain toast.', b_pG, b_cG, b_fG) +
+          renderMeal('12:30 PM', 'Lunch', 'cyan-400', 'Quinoa Bowl loaded with black beans, roasted sweet potatoes, broccoli & tahini drizzle.', l_pG, l_cG, l_fG) +
+          renderMeal('03:30 PM', 'Pre-Workout', 'cyan-400', 'Pea Protein Shake + banana blended with almond milk and chia seeds.', s_pG, s_cG, s_fG) +
+          renderMeal('07:00 PM', 'Dinner', 'cyan-400', 'Lentil Dahl Curry with brown rice + steamed asparagus.', d_pG, d_cG, d_fG);
       } else if (type === 'highprotein') {
-        mealsHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Breakfast</span><p class="text-xs text-white mt-1">5 Egg whites + 1 whole egg omelet + 1 cup Oats with berries.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Lunch</span><p class="text-xs text-white mt-1">Grilled Turkey breast (200g) + Jasmine Rice (150g) + Steamed Green Beans.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Dinner</span><p class="text-xs text-white mt-1">Baked Cod or Tuna filet + roasted sweet potatoes + broccoli florets.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Snack</span><p class="text-xs text-white mt-1">Whey Protein Isolate + 200g Greek Yogurt (0% fat).</p></div>
-        `;
+        mealsHTML = 
+          renderMeal('08:00 AM', 'Breakfast', '[#39ff14]', '5 Egg whites + 1 whole egg omelet + 1 cup Oats with berries.', b_pG, b_cG, b_fG) +
+          renderMeal('12:30 PM', 'Lunch', '[#39ff14]', 'Grilled Turkey breast (200g) + Jasmine Rice (150g) + Steamed Green Beans.', l_pG, l_cG, l_fG) +
+          renderMeal('04:00 PM', 'Pre-Workout', '[#39ff14]', 'Whey Protein Isolate + 200g Greek Yogurt (0% fat) + Apple.', s_pG, s_cG, s_fG) +
+          renderMeal('08:00 PM', 'Dinner', '[#39ff14]', 'Baked Cod or Tuna filet + roasted sweet potatoes + broccoli florets.', d_pG, d_cG, d_fG);
       } else {
-        mealsHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Breakfast</span><p class="text-xs text-white mt-1">3 Scrambled Eggs + 2 slices whole wheat toast + 1 orange.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Lunch</span><p class="text-xs text-white mt-1">Lean Sirloin steak wrap with lettuce, tomatoes, low-fat cheese, and brown rice.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Dinner</span><p class="text-xs text-white mt-1">Baked Salmon filet + sweet potato wedges + roasted mixed vegetables.</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><span class="text-[9px] text-[#39ff14] font-bold font-mono uppercase">Snack</span><p class="text-xs text-white mt-1">Mixed Almonds & Walnuts + 1 apple.</p></div>
-        `;
+        mealsHTML = 
+          renderMeal('08:00 AM', 'Breakfast', '[#39ff14]', '3 Scrambled Eggs + 2 slices whole wheat toast + 1 orange.', b_pG, b_cG, b_fG) +
+          renderMeal('01:00 PM', 'Lunch', '[#39ff14]', 'Lean Sirloin steak wrap with lettuce, tomatoes, low-fat cheese, and brown rice.', l_pG, l_cG, l_fG) +
+          renderMeal('04:00 PM', 'Snack', '[#39ff14]', 'Mixed Almonds & Walnuts + 1 apple + Protein Shake.', s_pG, s_cG, s_fG) +
+          renderMeal('07:30 PM', 'Dinner', '[#39ff14]', 'Baked Salmon filet + sweet potato wedges + roasted mixed vegetables.', d_pG, d_cG, d_fG);
       }
       dietBox.innerHTML = mealsHTML;
       
@@ -1138,27 +1151,44 @@ class FitnessApp {
       const workoutBox = document.getElementById('plan-workout-content');
       let splitHTML = '';
       
+      const renderDay = (id, title, desc, focus, rpe, rest) => `
+        <div class="p-3 bg-white/5 rounded-xl border border-white/5 group hover:border-[#00f2fe]/40 transition-colors">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="${id}" class="accent-[#00f2fe] cursor-pointer">
+              <label for="${id}" class="text-xs text-white font-semibold cursor-pointer group-hover:text-[#00f2fe] transition-colors">${title}</label>
+            </div>
+            <span class="text-[8px] bg-[#00f2fe]/10 text-[#00f2fe] px-1.5 py-0.5 rounded uppercase font-mono">${focus}</span>
+          </div>
+          <div class="mt-2 pl-6 space-y-1">
+            <p class="text-[10px] text-gray-400 font-mono tracking-tight">${desc}</p>
+            <div class="flex gap-3 text-[9px] text-gray-500 font-bold uppercase tracking-wider font-mono">
+              <span>RPE: <span class="text-white">${rpe}</span></span>
+              <span>REST: <span class="text-white">${rest}</span></span>
+              <span>TEMPO: <span class="text-white">3-1-1-0</span></span>
+            </div>
+          </div>
+        </div>
+      `;
+      
       if (level === 'beginner') {
-        splitHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-b1"><label for="ex-b1" class="text-xs text-white font-semibold">Day 1: Full Body Compound</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Squats (3x8) | Bench Press (3x8) | Lat Pulldowns (3x10)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-b2"><label for="ex-b2" class="text-xs text-white font-semibold">Day 2: Full Body Compound</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Romanian Deadlifts (3x10) | Overhead Press (3x8) | Barbell Rows (3x8)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-b3"><label for="ex-b3" class="text-xs text-white font-semibold">Day 3: Full Body Cardio & Core</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Incline Walk (20m) | Hanging Knee Raises (3x12) | Planks (3x60s)</p></div>
-        `;
+        splitHTML = 
+          renderDay('ex-b1', 'Day 1: Full Body Compound', 'Squats (3x8) | Bench Press (3x8) | Lat Pulldowns (3x10)', 'Hypertrophy', '7.0', '90s') +
+          renderDay('ex-b2', 'Day 2: Full Body Compound', 'Romanian Deadlifts (3x10) | Overhead Press (3x8) | Barbell Rows (3x8)', 'Strength', '7.5', '120s') +
+          renderDay('ex-b3', 'Day 3: Full Body Cardio & Core', 'Incline Walk (20m) | Hanging Knee Raises (3x12) | Planks (3x60s)', 'Endurance', '6.0', '45s');
       } else if (level === 'intermediate') {
-        splitHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-i1"><label for="ex-i1" class="text-xs text-white font-semibold">Day 1: Upper Body Power</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Flat Bench Press (4x6) | Pull-ups (4x8) | DB Shoulder Press (3x8)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-i2"><label for="ex-i2" class="text-xs text-white font-semibold">Day 2: Lower Body Power</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Back Squats (4x6) | Romanian Deadlifts (4x8) | Calf Raises (4x15)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-i3"><label for="ex-i3" class="text-xs text-white font-semibold">Day 3: Upper Hypertrophy</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Incline DB Press (3x10) | Cable Rows (3x12) | Lateral Raises (4x12)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-i4"><label for="ex-i4" class="text-xs text-white font-semibold">Day 4: Lower Hypertrophy</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Leg Press (3x12) | Leg Curls (3x12) | Lunges (3x10 per leg)</p></div>
-        `;
+        splitHTML = 
+          renderDay('ex-i1', 'Day 1: Upper Body Power', 'Flat Bench Press (4x6) | Pull-ups (4x8) | DB Shoulder Press (3x8)', 'Power', '8.5', '120s') +
+          renderDay('ex-i2', 'Day 2: Lower Body Power', 'Back Squats (4x6) | Romanian Deadlifts (4x8) | Calf Raises (4x15)', 'Power', '8.5', '120s') +
+          renderDay('ex-i3', 'Day 3: Upper Hypertrophy', 'Incline DB Press (3x10) | Cable Rows (3x12) | Lateral Raises (4x12)', 'Hypertrophy', '7.5', '90s') +
+          renderDay('ex-i4', 'Day 4: Lower Hypertrophy', 'Leg Press (3x12) | Leg Curls (3x12) | Lunges (3x10 per leg)', 'Hypertrophy', '8.0', '90s');
       } else { // Pro
-        splitHTML = `
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-p1"><label for="ex-p1" class="text-xs text-white font-semibold">Day 1: Push (Chest, Shoulders, Tris)</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Barbell Bench (4x6) | Overhead Press (3x8) | Skull Crushers (3x10)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-p2"><label for="ex-p2" class="text-xs text-white font-semibold">Day 2: Pull (Back, Rear Delts, Bis)</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Weighted Pull-ups (4x6) | Chest Supported Rows (3x10) | Hammer Curls (3x12)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-p3"><label for="ex-p3" class="text-xs text-white font-semibold">Day 3: Legs (Quads, Hams, Calves)</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Front Squats (4x8) | Lying Leg Curls (4x10) | Standing Calf Raises (4x15)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-p4"><label for="ex-p4" class="text-xs text-white font-semibold">Day 4: Push (Volume Focus)</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Incline DB Press (3x12) | Cable Flyes (3x15) | Lateral Raises (4x15)</p></div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/5"><div class="flex items-center gap-2"><input type="checkbox" id="ex-p5"><label for="ex-p5" class="text-xs text-white font-semibold">Day 5: Pull (Volume Focus)</label></div><p class="text-[10px] text-gray-500 mt-1 pl-5">Lat Pulldowns (3x12) | Face Pulls (4x15) | Incline DB Curls (3x10)</p></div>
-        `;
+        splitHTML = 
+          renderDay('ex-p1', 'Day 1: Push (Chest, Shoulders, Tris)', 'Barbell Bench (4x6) | Overhead Press (3x8) | Skull Crushers (3x10)', 'Strength', '9.0', '180s') +
+          renderDay('ex-p2', 'Day 2: Pull (Back, Rear Delts, Bis)', 'Weighted Pull-ups (4x6) | Chest Supported Rows (3x10) | Hammer Curls (3x12)', 'Strength', '9.0', '180s') +
+          renderDay('ex-p3', 'Day 3: Legs (Quads, Hams, Calves)', 'Front Squats (4x8) | Lying Leg Curls (4x10) | Standing Calf Raises (4x15)', 'Strength', '9.0', '180s') +
+          renderDay('ex-p4', 'Day 4: Push (Volume Focus)', 'Incline DB Press (3x12) | Cable Flyes (3x15) | Lateral Raises (4x15)', 'Hypertrophy', '8.0', '60s') +
+          renderDay('ex-p5', 'Day 5: Pull (Volume Focus)', 'Lat Pulldowns (3x12) | Face Pulls (4x15) | Incline DB Curls (3x10)', 'Hypertrophy', '8.0', '60s');
       }
       
       workoutBox.innerHTML = splitHTML;
