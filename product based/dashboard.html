@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Indian Nature Product (INP)</title>
+  <meta name="description" content="Discover premium Kokan turmeric and authentic nature spices by INP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Dashboard Header -->
+  <header class="dashboard-header">
+    <div class="logo-small gradient-text">INP Dashboard</div>
+    <nav class="nav-links">
+      <a href="#turmeric">Turmeric Collection</a>
+      <a href="#spices">Nature Spices</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="gradient-text">The Essence of Kokan</h1>
+    <p>
+      At Indian Nature Product (INP), we source the finest, most potent turmeric directly from the heart of Kokan. 
+      Known for its vibrant golden color and high curcumin content, our Kokan Turmeric offers unparalleled purity and aroma.
+      Experience nature's gold, sustainably harvested and carefully crafted for your well-being.
+    </p>
+  </section>
+
+  <!-- Advertisement Banner -->
+  <section class="section" style="padding-top: 0; padding-bottom: 2rem;">
+    <div style="background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold)); border-radius: 24px; padding: 3rem; text-align: center; color: #000; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 179, 0, 0.2);">
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Special Festive Offer! 🎉</h2>
+      <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 2rem;">Get flat 20% off on all Turmeric & Spice combos. Use code <strong>INPFEST20</strong> at checkout.</p>
+      <button style="background: #000; color: var(--primary-gold); border: none; padding: 0.8rem 2rem; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">Shop the Sale</button>
+    </div>
+  </section>
+
+  <!-- Turmeric Products -->
+  <section id="turmeric" class="section">
+    <h2 class="section-title">Premium Turmeric Selection</h2>
+    <div class="product-grid">
+      
+      <!-- Product 1: Pure Kokan Solid (Most Expensive) -->
+      <div class="product-card" style="animation-delay: 0.1s;">
+        <img src="./assets/kokan_turmeric_1783750032290.jpg" alt="Pure Kokan Solid" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">Flagship</span>
+          <h3 class="product-title">Pure Kokan Solid</h3>
+          <p class="product-desc">Our most premium offering. 100% authentic, hand-selected Kokan solid turmeric roots, known for maximum potency and brilliant color.</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,499<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / kg</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2: Salem Premium Turmeric -->
+      <div class="product-card" style="animation-delay: 0.15s;">
+        <img src="./assets/salem_turmeric_1783792210513.jpg" alt="Salem Premium Turmeric" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">High Curcumin</span>
+          <h3 class="product-title">Salem Premium Turmeric</h3>
+          <p class="product-desc">Sourced from the famous farms of Salem. Rich in essential oils and intensely aromatic, favored by top culinary chefs.</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,199<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / kg</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3: Pune Solid -->
+      <div class="product-card" style="animation-delay: 0.2s;">
+        <img src="./assets/pune_turmeric_1783750048171.jpg" alt="Pune Solid" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">Popular</span>
+          <h3 class="product-title">Pune Solid</h3>
+          <p class="product-desc">A highly sought-after variety from the Pune region. Offers a balanced flavor profile, perfect for daily culinary use and wellness.</p>
+          <div class="product-footer">
+            <span class="product-price">₹999<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / kg</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4: Erode Golden Root -->
+      <div class="product-card" style="animation-delay: 0.25s;">
+        <img src="./assets/erode_turmeric_1783792229098.jpg" alt="Erode Golden Root" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">Traditional</span>
+          <h3 class="product-title">Erode Golden Root</h3>
+          <p class="product-desc">Authentic Erode turmeric renowned for its bright golden-yellow hue and natural healing properties.</p>
+          <div class="product-footer">
+            <span class="product-price">₹849<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / kg</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5: Fixture of 2 Solid -->
+      <div class="product-card" style="animation-delay: 0.3s;">
+        <img src="./assets/fixture_turmeric_1783750064406.jpg" alt="Fixture of 2 Solid" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">Value Blend</span>
+          <h3 class="product-title">Fixture of 2 Solid</h3>
+          <p class="product-desc">A carefully crafted blend of two premium solid turmeric types, offering great color and taste at an exceptional value.</p>
+          <div class="product-footer">
+            <span class="product-price">₹649<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / kg</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Nature Spices -->
+  <section id="spices" class="section">
+    <h2 class="section-title">Authentic Nature Spices</h2>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+      
+      <!-- Spices Collection -->
+      <div class="product-card">
+        <img src="./assets/nature_spices_1783750082126.jpg" alt="Nature Spices Assortment" class="product-img">
+        <div class="product-info">
+          <span class="product-badge">New Arrival</span>
+          <h3 class="product-title">INP Heritage Spice Box</h3>
+          <p class="product-desc">Elevate your dishes with our curated assortment of natural Indian spices. Includes premium Cardamom, Black Pepper, Cinnamon, and Cumin sourced directly from authentic farms.</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,249<span style="font-size: 0.9rem; color: #B3B3B3; font-weight: normal;"> / box</span></span>
+            <button class="buy-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="logo-small gradient-text" style="margin-bottom: 1rem;">INP</div>
+    <p class="footer-text">&copy; 2026 Indian Nature Product. All rights reserved.</p>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    // Protection logic for dashboard
+    if(localStorage.getItem('inp_auth') !== 'true') {
+      window.location.href = './index.html';
+    }
+  </script>
+</body>
+</html>
