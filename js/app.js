@@ -1,6 +1,6 @@
 /**
  * app.js
- * Main application controller for the Fitness Hub SPA.
+ * Main application controller for the Smart Fitness Recommendation System SPA.
  * Manages database, auth state, router, calculations, user and admin dashboards.
  * Extended with 1RM Classifier, Hydration waves, Diet planners, backups, and trainer roles.
  */
