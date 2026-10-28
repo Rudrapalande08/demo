@@ -95,7 +95,7 @@
           </a>
           <a href="#" data-target="sandbox" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Lifting Biomechanics Sandbox
+            Squat & Deadlift Advisor
           </a>
           
           <div class="h-[1px] bg-white/5 my-2"></div>
@@ -249,9 +249,9 @@
               <div class="w-12 h-12 rounded-xl bg-[#39ff14]/10 text-[#39ff14] flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:bg-[#39ff14] group-hover:text-black">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
-              <h5 class="text-md font-bold text-white mb-2">4. Lifting Mechanics Sandbox</h5>
-              <p class="text-xs text-gray-500 leading-relaxed mb-4">Tune squat/deadlift vectors on an animated skeleton to examine spinal torque and center-of-mass safety metrics.</p>
-              <span class="text-xs text-[#39ff14] font-bold group-hover:underline flex items-center gap-1 font-mono">LAUNCH BIOMECH &rarr;</span>
+              <h5 class="text-md font-bold text-white mb-2">4. Squat & Deadlift Form Advisor</h5>
+              <p class="text-xs text-gray-400 leading-relaxed mb-4">Personalized lifting form breakdown, setup cues, bar path, and joint safety based on your age and body weight.</p>
+              <span class="text-xs text-cyan-400 font-bold group-hover:underline flex items-center gap-1 font-mono">EXPLORE FORM &rarr;</span>
             </div>
 
             <!-- Card 5: Diet & Workout Planner -->
@@ -1028,77 +1028,197 @@
           </div>
         </section>
 
-        <!-- SECTION 10: LIFTING BIOMECHANICS SANDBOX -->
+        <!-- SECTION 10: SQUAT & DEADLIFT FORM ADVISOR -->
         <section id="sec-sandbox" class="spa-section hidden space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Inputs Panel -->
+            <!-- Lifter Profile & Parameter Panel -->
             <div class="lg:col-span-5 p-6 rounded-3xl bg-[#0c0d12]/50 border border-white/5 backdrop-blur-md space-y-6">
-              <h3 class="text-lg font-bold text-white border-l-4 border-[#39ff14] pl-3">Biomechanics Sliders</h3>
+              <h3 class="text-lg font-bold text-white border-l-4 border-cyan-400 pl-3">Lifter Profile & Parameters</h3>
               
               <div class="space-y-5">
+                <!-- Exercise Selector -->
                 <div class="space-y-1.5">
-                  <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">Exercise Select</label>
+                  <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest font-mono">Select Exercise</label>
                   <div class="grid grid-cols-2 gap-3">
                     <button type="button" id="sandbox-btn-squat" class="seg-btn active">Squat</button>
                     <button type="button" id="sandbox-btn-deadlift" class="seg-btn">Deadlift</button>
                   </div>
                 </div>
 
-                <!-- Hip Flexion slider -->
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center text-xs">
-                    <span class="font-bold text-gray-400 uppercase font-mono">Hip Flexion Angle</span>
-                    <span id="lbl-sandbox-hip" class="font-bold text-white">45°</span>
-                  </div>
-                  <input type="range" id="slider-sandbox-hip" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#39ff14]" min="10" max="120" value="45">
+                <!-- Variant Selector -->
+                <div class="space-y-1.5">
+                  <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest font-mono">Exercise Style / Variation</label>
+                  <select id="sandbox-variant" class="w-full bg-[#0c101c] border border-white/10 rounded-xl p-2.5 text-xs text-white focus:border-[#00f2fe] outline-none">
+                    <option value="highbar">Barbell Back Squat (High Bar)</option>
+                    <option value="lowbar">Barbell Back Squat (Low Bar - Powerlifting)</option>
+                    <option value="front">Front Squat (Olympic / Quad Focus)</option>
+                  </select>
                 </div>
 
-                <!-- Knee Flexion slider -->
+                <!-- Age input with slider -->
                 <div class="space-y-2">
                   <div class="flex justify-between items-center text-xs">
-                    <span class="font-bold text-gray-400 uppercase font-mono">Knee Flexion Angle</span>
-                    <span id="lbl-sandbox-knee" class="font-bold text-white">90°</span>
+                    <span class="font-bold text-gray-300">Lifter Age</span>
+                    <span id="lbl-sandbox-age" class="font-mono font-bold text-cyan-400 bg-cyan-950/40 px-2.5 py-0.5 rounded-lg border border-cyan-500/20">26 yrs</span>
                   </div>
-                  <input type="range" id="slider-sandbox-knee" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#39ff14]" min="10" max="140" value="90">
+                  <input type="range" id="slider-sandbox-age" min="14" max="75" value="26" class="w-full">
+                  <div class="flex justify-between text-[9px] text-gray-500 font-mono">
+                    <span>14 (Youth)</span>
+                    <span>30 (Prime)</span>
+                    <span>50 (Master)</span>
+                    <span>75+ (Veteran)</span>
+                  </div>
                 </div>
 
-                <!-- Torso Lean slider -->
+                <!-- Weight input with slider -->
                 <div class="space-y-2">
                   <div class="flex justify-between items-center text-xs">
-                    <span class="font-bold text-gray-400 uppercase font-mono">Torso Lean Angle</span>
-                    <span id="lbl-sandbox-torso" class="font-bold text-white">30°</span>
+                    <span class="font-bold text-gray-300">Body Weight</span>
+                    <span id="lbl-sandbox-weight" class="font-mono font-bold text-emerald-400 bg-emerald-950/40 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">75 kg</span>
                   </div>
-                  <input type="range" id="slider-sandbox-torso" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#39ff14]" min="0" max="75" value="30">
+                  <input type="range" id="slider-sandbox-weight" min="40" max="150" value="75" class="w-full">
+                  <div class="flex justify-between text-[9px] text-gray-500 font-mono">
+                    <span>40 kg (Light)</span>
+                    <span>75 kg (Mid)</span>
+                    <span>110 kg (Heavy)</span>
+                    <span>150 kg (Super)</span>
+                  </div>
+                </div>
+
+                <!-- Height input with slider -->
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-gray-300">Height (Limb Leverages)</span>
+                    <span id="lbl-sandbox-height" class="font-mono font-bold text-white bg-white/5 px-2.5 py-0.5 rounded-lg border border-white/10">178 cm</span>
+                  </div>
+                  <input type="range" id="slider-sandbox-height" min="140" max="210" value="178" class="w-full">
+                </div>
+
+                <!-- Joint & Spine Sensitivity Consideration -->
+                <div class="space-y-1.5">
+                  <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest font-mono">Joint / Spine Priority</label>
+                  <select id="sandbox-sensitivity" class="w-full bg-[#0c101c] border border-white/10 rounded-xl p-2.5 text-xs text-white focus:border-[#00f2fe] outline-none">
+                    <option value="none">Standard / Healthy Joints</option>
+                    <option value="back">Lower Back Sensitivity (Minimize Lumbar Shear)</option>
+                    <option value="knee">Knee Sensitivity (Control Forward Knee Travel)</option>
+                    <option value="mobility">Limited Ankle/Hip Mobility</option>
+                  </select>
                 </div>
               </div>
 
-              <div class="p-4 bg-white/5 border border-white/5 rounded-2xl text-xs space-y-1 font-mono">
-                <span class="text-[#39ff14] font-bold uppercase block">BIOMECHANICAL TIPS</span>
-                <p id="sandbox-live-tips" class="text-gray-400 text-[10px] leading-relaxed">Adjust joint sliders to watch mechanical vectors update.</p>
+              <!-- Quick Biomechanics Summary Box -->
+              <div class="p-4 bg-white/5 border border-white/5 rounded-2xl text-xs space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-cyan-400 font-bold uppercase tracking-wider text-[10px] font-mono flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                    Biomechanical Leverage
+                  </span>
+                  <span id="sandbox-leverage-tag" class="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Balanced Femur/Torso</span>
+                </div>
+                <p id="sandbox-live-tips" class="text-gray-300 text-xs leading-relaxed">Solid symmetry. Weight distribution balanced through the midfoot tripod.</p>
               </div>
             </div>
             
-            <!-- Physics Canvas Renderer -->
-            <div class="lg:col-span-7 p-6 rounded-3xl bg-[#0c0d12]/50 border border-white/5 backdrop-blur-md flex flex-col justify-between items-center min-h-[400px]">
-              <h3 class="text-lg font-bold text-white border-l-4 border-cyan-500 pl-3 w-full text-left">Joint Ratios Visualizer</h3>
+            <!-- Form Breakdown & Visual Execution Panel -->
+            <div class="lg:col-span-7 space-y-6">
               
-              <!-- Sandbox Vector Canvas -->
-              <div class="w-full max-w-sm h-64 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden relative my-4">
-                <canvas id="sandbox-physics-canvas" class="w-full h-full"></canvas>
-                <div class="absolute top-2 left-2 text-[8px] font-mono text-gray-600">GRAVITY VECTOR G = 9.81m/s²</div>
+              <!-- Diagnostic Header & Stance Cues -->
+              <div class="p-6 rounded-3xl bg-[#0c0d12]/50 border border-white/5 backdrop-blur-md space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
+                  <div>
+                    <h4 id="sandbox-analysis-title" class="text-base font-bold text-white">Customized Squat Protocol</h4>
+                    <p id="sandbox-analysis-subtitle" class="text-xs text-gray-400 mt-0.5">Optimized for 26-year-old, 75 kg lifter</p>
+                  </div>
+                  <span id="sandbox-safety-badge" class="self-start sm:self-auto text-[10px] font-mono px-3 py-1 rounded-full font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">LOW INJURY RISK</span>
+                </div>
+
+                <!-- Custom Stance & Bar Path Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  <div class="p-3 bg-white/5 rounded-2xl border border-white/5 space-y-1">
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest font-mono block">Recommended Stance</span>
+                    <p id="sandbox-stance-val" class="font-bold text-white">Shoulder Width (1.1x)</p>
+                    <span id="sandbox-stance-detail" class="text-[10px] text-cyan-400 font-mono">15°–20° Toe Outward Flare</span>
+                  </div>
+                  <div class="p-3 bg-white/5 rounded-2xl border border-white/5 space-y-1">
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest font-mono block">Bar Placement & Grip</span>
+                    <p id="sandbox-bar-val" class="font-bold text-white">Upper Traps (High Bar)</p>
+                    <span id="sandbox-bar-detail" class="text-[10px] text-emerald-400 font-mono">Thumbs-around, tight shelf</span>
+                  </div>
+                  <div class="p-3 bg-white/5 rounded-2xl border border-white/5 space-y-1">
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest font-mono block">Optimal Depth / Target</span>
+                    <p id="sandbox-depth-val" class="font-bold text-white">Hip Crease Below Knee</p>
+                    <span id="sandbox-depth-detail" class="text-[10px] text-purple-400 font-mono">Full Parallel (~95°)</span>
+                  </div>
+                </div>
+
+                <!-- Age & Weight Specific Form Directives -->
+                <div class="space-y-3 pt-1">
+                  <!-- Age Specific Directive -->
+                  <div class="p-3.5 bg-cyan-950/20 border border-cyan-500/20 rounded-2xl flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 font-bold font-mono text-xs">
+                      AGE
+                    </div>
+                    <div>
+                      <h5 class="text-xs font-bold text-cyan-300">Age-Specific Form Guidelines: <span id="sandbox-age-group" class="font-normal text-white">Prime Category (20–35)</span></h5>
+                      <p id="sandbox-age-desc" class="text-xs text-gray-300 mt-1 leading-relaxed">Maintain strong intra-abdominal pressure bracing (Valsalva). Rebound out of the hole with active glute drive. Maintain a controlled 2-3 second eccentric lowering phase.</p>
+                    </div>
+                  </div>
+
+                  <!-- Weight & Lever Directive -->
+                  <div class="p-3.5 bg-emerald-950/20 border border-emerald-500/20 rounded-2xl flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 font-bold font-mono text-xs">
+                      MASS
+                    </div>
+                    <div>
+                      <h5 class="text-xs font-bold text-emerald-300">Weight & Lever Dynamics: <span id="sandbox-weight-group" class="font-normal text-white">Medium Weight Lifter (75 kg)</span></h5>
+                      <p id="sandbox-weight-desc" class="text-xs text-gray-300 mt-1 leading-relaxed">Barbell path must track vertically over the center of your shoelaces. Balance 50% quad drive and 50% posterior chain extension to distribute joint shear evenly.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive 4-Phase Step-by-Step Form Execution -->
+                <div class="space-y-3 pt-2">
+                  <h5 class="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    4-Phase Execution Blueprint
+                  </h5>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs" id="sandbox-phase-container">
+                    <!-- Phases rendered dynamically -->
+                  </div>
+                </div>
+
+                <!-- Common Critical Mistakes to Avoid -->
+                <div class="p-4 bg-red-950/15 border border-red-500/20 rounded-2xl space-y-2">
+                  <span class="text-red-400 font-bold uppercase tracking-wider text-[10px] font-mono flex items-center gap-2">
+                    <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    Common Pitfalls & Direct Cues for Your Profile
+                  </span>
+                  <ul id="sandbox-pitfalls-list" class="space-y-1.5 text-xs text-gray-300">
+                    <!-- Dynamic pitfalls -->
+                  </ul>
+                </div>
               </div>
 
-              <!-- Safety Alert HUD -->
-              <div class="grid grid-cols-2 gap-4 w-full text-center">
-                <div class="p-3 bg-white/5 border border-white/5 rounded-xl">
-                  <span class="text-[9px] text-gray-500 uppercase font-semibold font-mono">Spine Shear Ratio</span>
-                  <p id="sandbox-metric-spine" class="text-sm font-bold text-white mt-1">Normal (Low)</p>
+              <!-- Animated Biomechanics Execution Canvas -->
+              <div class="p-6 rounded-3xl bg-[#0c0d12]/50 border border-white/5 backdrop-blur-md space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Biomechanical Form Simulation</h4>
+                  <div class="flex items-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <span id="sandbox-anim-phase" class="text-[10px] text-cyan-400 font-mono">Parallel Bottom Position</span>
+                  </div>
                 </div>
-                <div class="p-3 bg-white/5 border border-white/5 rounded-xl">
-                  <span class="text-[9px] text-gray-500 uppercase font-semibold font-mono">Knee Load Ratio</span>
-                  <p id="sandbox-metric-knee" class="text-sm font-bold text-white mt-1">Balanced</p>
+
+                <div class="w-full h-56 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden relative">
+                  <canvas id="sandbox-physics-canvas" class="w-full h-full"></canvas>
+                  <div class="absolute bottom-2 left-3 text-[9px] font-mono text-gray-500 flex gap-4">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Spine Neutral</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Barbell Midfoot Path</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-pink-400"></span> Hip Hinge Axis</span>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>

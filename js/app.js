@@ -308,8 +308,8 @@ class FitnessApp {
             headerSubtitle.innerText = "Generates customized macronutrients, daily meals, and weekly training splits";
             break;
           case 'sandbox':
-            headerTitle.innerText = "Lifting Biomechanics Sandbox";
-            headerSubtitle.innerText = "Adjust joint sliders on an animated skeleton to estimate lift forces";
+            headerTitle.innerText = "Squat & Deadlift Form Advisor";
+            headerSubtitle.innerText = "Personalized lifting mechanics, setup cues, and joint safety based on your age and weight";
             break;
           case 'user':
             headerTitle.innerText = this.currentUser ? `${this.currentUser.fullname}'s Console` : "Member Registration Portal";
@@ -336,7 +336,7 @@ class FitnessApp {
         if (target === 'planner') this.planner.sync();
         if (target === 'sandbox' && window.biomechSandbox) {
           window.biomechSandbox.resizeCanvas();
-          window.biomechSandbox.render();
+          window.biomechSandbox.updateAnalysis();
         }
         if (window.location.hash !== '#' + target) {
           history.replaceState(null, '', '#' + target);
