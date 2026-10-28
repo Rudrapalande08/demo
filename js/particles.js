@@ -70,15 +70,15 @@ class ParticleSystem {
   
   createNewParticle(x = null, y = null, isTemporary = false) {
     const angle = Math.random() * Math.PI * 2;
-    const speed = isTemporary ? Math.random() * 4 + 2 : Math.random() * 1.0 + 0.4;
+    const speed = isTemporary ? Math.random() * 2.5 + 1 : Math.random() * 0.5 + 0.15;
     
     return {
       x: x !== null ? x : Math.random() * this.canvas.width,
       y: y !== null ? y : Math.random() * this.canvas.height,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      radius: isTemporary ? Math.random() * 2.0 + 1 : Math.random() * 2.5 + 1,
-      color: isTemporary ? 'rgba(57, 255, 20, 0.9)' : 'rgba(0, 242, 254, 0.35)', // lime click, cyan passive
+      radius: isTemporary ? Math.random() * 1.8 + 1 : Math.random() * 1.8 + 0.8,
+      color: isTemporary ? 'rgba(0, 242, 254, 0.7)' : 'rgba(0, 242, 254, 0.18)', // subtle atmospheric particles
       life: isTemporary ? 1.0 : null,
       decay: isTemporary ? Math.random() * 0.02 + 0.01 : null
     };
@@ -147,10 +147,10 @@ class ParticleSystem {
         const dist = Math.sqrt(dx * dx + dy * dy);
         
         if (dist < this.maxDistance) {
-          const alpha = (1 - dist / this.maxDistance) * 0.2;
+          const alpha = (1 - dist / this.maxDistance) * 0.08;
           this.ctx.beginPath();
-          this.ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`; // Glowing cyan lines
-          this.ctx.lineWidth = 0.9;
+          this.ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`; // Soft ambient lines
+          this.ctx.lineWidth = 0.6;
           this.ctx.moveTo(p.x, p.y);
           this.ctx.lineTo(p2.x, p2.y);
           this.ctx.stroke();

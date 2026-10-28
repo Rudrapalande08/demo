@@ -70,16 +70,16 @@ class BiomechanicsSandbox {
     this.activeExercise = type;
     
     if (type === 'squat') {
-      this.btnSquat.className = "py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300";
-      this.btnDeadlift.className = "py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300";
+      this.btnSquat.classList.add('active');
+      this.btnDeadlift.classList.remove('active');
       
       // Default squat angles
       this.hipSlider.value = 75;
       this.kneeSlider.value = 90;
       this.torsoSlider.value = 35;
     } else {
-      this.btnDeadlift.className = "py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300";
-      this.btnSquat.className = "py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300";
+      this.btnDeadlift.classList.add('active');
+      this.btnSquat.classList.remove('active');
       
       // Default deadlift angles
       this.hipSlider.value = 100;

@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Styling Sheet -->
   <link rel="stylesheet" href="css/style.css">
   <!-- Three.js CDN for 3D Mannequin -->
@@ -347,8 +349,8 @@
                 <div class="space-y-1.5">
                   <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">Biological Gender</label>
                   <div class="grid grid-cols-2 gap-3">
-                    <button type="button" id="bf-gender-male" class="py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300">Male</button>
-                    <button type="button" id="bf-gender-female" class="py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300">Female</button>
+                    <button type="button" id="bf-gender-male" class="seg-btn active">Male</button>
+                    <button type="button" id="bf-gender-female" class="seg-btn">Female</button>
                   </div>
                 </div>
 
@@ -1037,8 +1039,8 @@
                 <div class="space-y-1.5">
                   <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">Exercise Select</label>
                   <div class="grid grid-cols-2 gap-3">
-                    <button type="button" id="sandbox-btn-squat" class="py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300">Squat</button>
-                    <button type="button" id="sandbox-btn-deadlift" class="py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300">Deadlift</button>
+                    <button type="button" id="sandbox-btn-squat" class="seg-btn active">Squat</button>
+                    <button type="button" id="sandbox-btn-deadlift" class="seg-btn">Deadlift</button>
                   </div>
                 </div>
 

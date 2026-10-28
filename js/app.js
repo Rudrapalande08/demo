@@ -500,14 +500,14 @@ class FitnessApp {
     });
 
     document.getElementById('bf-gender-male').addEventListener('click', () => {
-      document.getElementById('bf-gender-male').className = "py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300";
-      document.getElementById('bf-gender-female').className = "py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300";
+      document.getElementById('bf-gender-male').classList.add('active');
+      document.getElementById('bf-gender-female').classList.remove('active');
       document.getElementById('bf-hip-group').classList.add('hidden');
       this.calcs.runBodyFat();
     });
     document.getElementById('bf-gender-female').addEventListener('click', () => {
-      document.getElementById('bf-gender-female').className = "py-2 border border-[#39ff14] bg-[#39ff14]/10 text-white rounded-xl text-xs font-bold transition-all duration-300";
-      document.getElementById('bf-gender-male').className = "py-2 border border-white/5 hover:border-white/10 text-gray-400 rounded-xl text-xs font-semibold transition-all duration-300";
+      document.getElementById('bf-gender-female').classList.add('active');
+      document.getElementById('bf-gender-male').classList.remove('active');
       document.getElementById('bf-hip-group').classList.remove('hidden');
       this.calcs.runBodyFat();
     });
@@ -717,7 +717,7 @@ class FitnessApp {
     },
 
     runBodyFat: () => {
-      const isMale = document.getElementById('bf-gender-male').classList.contains('border-[#39ff14]');
+      const isMale = document.getElementById('bf-gender-male').classList.contains('active') || document.getElementById('bf-gender-male').classList.contains('border-[#39ff14]');
       const h = parseFloat(document.getElementById('bf-height').value);
       const neck = parseFloat(document.getElementById('bf-neck').value);
       const waist = parseFloat(document.getElementById('bf-waist').value);

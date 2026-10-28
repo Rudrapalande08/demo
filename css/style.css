@@ -218,7 +218,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
    ========================================================================== */
 
 /* Display, Position, and Layout utilities */
-.hidden { display: none !important; }
 .flex { display: flex !important; }
 .flex-col { flex-direction: column !important; }
 .flex-row { flex-direction: row !important; }
@@ -231,6 +230,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .flex-wrap { flex-wrap: wrap !important; }
 .grid { display: grid !important; }
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+.block { display: block !important; }
+.hidden { display: none !important; }
 
 .fixed { position: fixed !important; }
 .sticky { position: -webkit-sticky !important; position: sticky !important; }
@@ -592,40 +593,208 @@ th, td {
   font-family: 'Share Tech Mono', monospace !important;
 }
 
-/* Accent Color Overrides for Sliders (Neon Lime Glow) */
+/* ==========================================================================
+   PREMIUM PROFESSIONAL FITNESS SUITE - DESIGN SYSTEM OVERHAUL
+   ========================================================================== */
+
+/* Universal Button Reset */
+button {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Remove distracting scanline overlay */
+.spa-section::before {
+  display: none !important;
+}
+
+/* Cards & Glass Containers: Solid, Rich, High-Contrast Glass */
+div[class*="bg-[#0c0d12]/50"],
+div[class*="bg-[#0c0d12]/80"],
+.spa-section > div[class*="rounded-3xl"] {
+  background: rgba(13, 17, 28, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.bg-white\/5 {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Segmented Buttons & Toggle Controls (Squat/Deadlift, Male/Female, etc.) */
+#sandbox-btn-squat, #sandbox-btn-deadlift,
+#bf-gender-male, #bf-gender-female,
+#bmi-toggle-metric, #bmi-toggle-imperial,
+#plan-btn-diet, #plan-btn-workout,
+#btn-tab-login, #btn-tab-signup,
+.seg-btn {
+  background: rgba(19, 26, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #94a3b8 !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#sandbox-btn-squat:hover, #sandbox-btn-deadlift:hover,
+#bf-gender-male:hover, #bf-gender-female:hover,
+#bmi-toggle-imperial:hover, #plan-btn-workout:hover,
+#btn-tab-signup:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Active Segmented Button State */
+#sandbox-btn-squat.active, #sandbox-btn-deadlift.active,
+#bf-gender-male.active, #bf-gender-female.active,
+button[class*="border-[#39ff14]"],
+button[class*="bg-[#39ff14]/10"],
+button[class*="border-[#00f2fe]"],
+button[class*="bg-[#00f2fe]"],
+.bg-gradient-to-r.from-\[\#39ff14\].to-\[\#00f2fe\].text-black {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%) !important;
+  border: 1.5px solid #00f2fe !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.3), inset 0 0 12px rgba(0, 242, 254, 0.15) !important;
+}
+
+/* Primary Action Submit Buttons */
+button[type="submit"],
+.btn-primary {
+  background: linear-gradient(135deg, #00f2fe 0%, #10b981 100%) !important;
+  color: #030712 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.35), 0 0 10px rgba(16, 185, 129, 0.2) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5), 0 0 15px rgba(16, 185, 129, 0.35) !important;
+}
+
+button[type="submit"]:active,
+.btn-primary:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Modern Precision Range Sliders */
 input[type="range"] {
-  accent-color: #39ff14 !important;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #1e293b !important;
+  border-radius: 9999px !important;
+  outline: none !important;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background 0.2s ease;
+}
+
+input[type="range"]:hover {
+  background: #283548 !important;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  border-radius: 9999px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  border: 2px solid #39ff14 !important;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.8), 0 0 4px #39ff14 !important;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #00f2fe !important;
+  border: 2.5px solid #ffffff !important;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.8), 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer;
+  margin-top: -6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 18px rgba(0, 242, 254, 1), 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: #1e293b;
+  border-radius: 9999px;
 }
 
 input[type="range"]::-moz-range-thumb {
-  border: 2px solid #39ff14 !important;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.8), 0 0 4px #39ff14 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #00f2fe !important;
+  border: 2.5px solid #ffffff !important;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.8), 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer;
 }
 
-/* Energetic Card Hover Scale & Glow Shadow updates */
+/* Modern Input Controls & Select Dropdowns */
+input[type="number"],
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+  font-size: 0.875rem !important;
+  font-family: inherit;
+  transition: all 0.2s ease !important;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #00f2fe !important;
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.2) !important;
+  outline: none !important;
+}
+
+/* Card Hover Elevation */
 .group.cursor-pointer {
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease !important;
 }
 .group.cursor-pointer:hover {
-  transform: translateY(-5px) scale(1.02) !important;
-  box-shadow: 0 15px 30px -10px rgba(57, 255, 20, 0.15), 0 0 20px -5px rgba(0, 242, 254, 0.2) !important;
-  border-color: rgba(57, 255, 20, 0.3) !important;
-}
-
-/* Custom interactive buttons theme */
-.bg-gradient-to-r.from-\[\#39ff14\].to-\[\#00f2fe\] {
-  background-image: linear-gradient(135deg, #39ff14 0%, #00f2fe 100%) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(0, 242, 254, 0.2) !important;
+  border-color: rgba(0, 242, 254, 0.35) !important;
 }
 
 /* Custom Scrollbar for Telemetry Console */
 #admin-telemetry-console::-webkit-scrollbar-thumb {
-  background: rgba(57, 255, 20, 0.3) !important;
+  background: rgba(0, 242, 254, 0.3) !important;
 }
 #admin-telemetry-console::-webkit-scrollbar-thumb:hover {
-  background: #39ff14 !important;
+  background: #00f2fe !important;
 }
