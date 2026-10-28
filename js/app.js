@@ -338,9 +338,18 @@ class FitnessApp {
           window.biomechSandbox.resizeCanvas();
           window.biomechSandbox.render();
         }
-        if (target === 'user') this.dashboard.renderChart();
+        if (window.location.hash !== '#' + target) {
+          history.replaceState(null, '', '#' + target);
+        }
       }
     };
+
+    if (window.location.hash) {
+      const initialTarget = window.location.hash.replace('#', '');
+      if (document.getElementById(`sec-${initialTarget}`)) {
+        this.router.navigate(initialTarget);
+      }
+    }
   }
 
   // --- 4. GLOBAL ANNOUNCEMENTS SYSTEM ---
