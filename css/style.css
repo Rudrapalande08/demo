@@ -509,13 +509,43 @@ th, td {
   border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
+/* Global Announcement Box Cyberpunk HUD Styling */
+#global-announcement-box {
+  background: linear-gradient(135deg, rgba(8, 47, 73, 0.45) 0%, rgba(12, 13, 18, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 242, 254, 0.25) !important;
+  border-left: 4px solid var(--color-cyan) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.12) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-radius: 14px !important;
+}
+
+#global-announcement-box h4 {
+  color: var(--color-cyan) !important;
+  letter-spacing: 0.1em;
+}
+
+#global-announcement-box p {
+  color: #cbd5e1 !important;
+}
+
 /* Close button formatting */
 #btn-close-announcement {
-  background: transparent;
-  border: none;
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #94a3b8 !important;
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+  padding: 4px 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+#btn-close-announcement:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #f87171 !important;
 }
 
 /* ==========================================================================
